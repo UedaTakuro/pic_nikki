@@ -1,5 +1,6 @@
 class DiariesController < ApplicationController
   def new
+    @category = Category.find(params[:category_id])
     @diary = Diary.new
   end
   
@@ -8,9 +9,14 @@ class DiariesController < ApplicationController
   end
   
   def create
-    @diary = Diary.new(book_params)
-    
-    redirect_to 
+    @category = Category.find(params[:category_id])
+    @diary = Diary.new(diary_params)
+    @diary.category_id = @category.id
+    if @diary.save
+      redirect_to category_path(@diary.category)
+    else
+      render :new
+    end
   end
   
   def edit

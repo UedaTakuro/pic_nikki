@@ -1,0 +1,16 @@
+<%= link_to @category.name, categories_path %>
+
+<%= link_to "New diary", new_category_diary_path(@category) %>
+
+<ul>
+  <% @diaries.each do |diary| %>
+      <%= image_tag diary.get_image(100,100) %>
+    
+    <li>
+      <%= link_to diary.title, category_diary_path(@category, diary) %>
+    </li>
+    <li>
+      <%= diary.body %>
+    </li>
+  <% end %>
+</ul>
