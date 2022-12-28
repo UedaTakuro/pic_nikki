@@ -30,18 +30,9 @@
               <% end %>
             </li>
             <li>
-              <%= link_to categories_path, class: 'nav-link text-light' do %>
-                <i class="fas fa-users"></i> Users
-              <% end %>
-            </li>
-            <li>
-              <%= link_to categories_path, class: 'nav-link text-light' do %>
-                <i class="fas fa-book-open"></i> Books
-              <% end %>
-            </li>
-            <li>
-              <%= link_to categories_path, class: 'nav-link text-light' do %>
-                <i class="fas fa-sign-out-alt"></i> logout
+              <%= form_with url: search_path, method: :get, class: 'nav-link text-light' do |f| %>
+                <%= f.date_field :created_at %>
+                <%= f.submit '検索', class: 'btn btn-primary'  %>
               <% end %>
             </li>
           </ul>

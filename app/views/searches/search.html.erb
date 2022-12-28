@@ -1,0 +1,17 @@
+<% if @diaries.nil? %>
+  <%= @search_again %>
+<% else %>
+  <div>
+    <% @diaries.each do |diary| %>
+    <div>
+      <%= image_tag diary.get_image(100,100) %>
+    </div>
+    <div>
+      <%= link_to diary.title, category_diary_path(diary.category, diary) %>
+    </div>
+    <div>
+      <%= diary.body %>
+    </div>
+    <% end %>
+  </div>
+<% end %>

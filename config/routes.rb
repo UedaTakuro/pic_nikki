@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :categories, only: [:new, :index, :show, :create,:edit ,:update, :destroy]do
     resources :diaries, only: [:new, :show, :create, :edit, :update, :destroy]
   end
+  
+  get "search" => "searches#search"
 end
