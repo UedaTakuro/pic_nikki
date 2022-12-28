@@ -1,0 +1,11 @@
+<h2>Diary show</h2>
+
+<h3><%= link_to @diary.category.name, category_path(@diary.category) %></h3>
+
+<div><%= @diary.title %></div>
+<div><%= @diary.body %></div>
+
+<div><%= image_tag @diary.get_image(100, 100) %></div>
+
+<div><%= link_to 'Edit', edit_category_diary_path(@diary.category, @diary) %></div>
+<div><%= link_to 'Delete', category_diary_path(@diary.category, @diary), method: :delete %></div>

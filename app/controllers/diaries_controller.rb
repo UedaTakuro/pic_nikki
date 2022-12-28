@@ -5,6 +5,7 @@ class DiariesController < ApplicationController
   end
   
   def show
+    @diary = Diary.find(params[:id])
     
   end
   
@@ -20,13 +21,23 @@ class DiariesController < ApplicationController
   end
   
   def edit
-    
+    @diary = Diary.find(params[:id])
   end
   
   def update
+    @diary = Diary.find(params[:id])
+    if @diary.update(diary_params)
+      redirect_to category_diary_path(@diary.category, @diary)
+    else
+      render :edit
+    end
   end
   
   def destroy
+    diary = Diary.find(params[:id])
+    diary.destroy
+    
+    redirect_to category_path(Category.find(params[:category_id]))
   end
   
   private

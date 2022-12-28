@@ -1,16 +1,29 @@
-<%= link_to @category.name, categories_path %>
+<h2><%= @category.name %></h2>
 
-<%= link_to "New diary", new_category_diary_path(@category) %>
+<div>
+  <%= link_to "New diary", new_category_diary_path(@category) %>
+</div>
 
-<ul>
-  <% @diaries.each do |diary| %>
-      <%= image_tag diary.get_image(100,100) %>
-    
-    <li>
-      <%= link_to diary.title, category_diary_path(@category, diary) %>
-    </li>
-    <li>
-      <%= diary.body %>
-    </li>
-  <% end %>
-</ul>
+
+<div>
+<% @diaries.each do |diary| %>
+  <div>
+  <%= image_tag diary.get_image(100,100) %>
+  </div>
+
+  <div>
+  <%= link_to diary.title, category_diary_path(@category, diary) %>
+  </div>
+
+  <div>
+  <%= diary.body %>
+  </div>
+
+<% end %>
+</div>
+
+<div>
+  </br><%= link_to 'Back', categories_path %>
+</div>
+<div><%= link_to 'Edit', edit_category_path(@category) %></div>
+<div><%= link_to 'Delete', category_path(@category), method: :delete %></div>

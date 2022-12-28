@@ -1,3 +1,7 @@
+<h2>Diary new</h2>
+
+<%= render 'layouts/error', obj: @diary %>
+
 <%= form_with model:[@category, @diary] do |f| %>
   
   <%= f.file_field :image, placeholder: "画像", accept: "image/*" %>
