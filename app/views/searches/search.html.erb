@@ -1,17 +1,32 @@
-<% if @diaries.nil? %>
-  <%= @search_again %>
-<% else %>
-  <div>
-    <% @diaries.each do |diary| %>
-    <div>
-      <%= image_tag diary.get_image(100,100) %>
+<div class="container py-1">
+  <div class="row">
+    
+    <div class="col-6 offset-3">
+      <div class="card-list-container py-5">
+        <% if @diaries.nil? %>
+          <%= @search_again %>
+        <% else %>
+          <% @diaries.each do |diary| %>
+            <div class="card w-50 mx-auto mt-4 shadow-lg">
+              <%= image_tag diary.get_image(100,100), class:"card-img-top" %>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-10">
+                    <p class="card-title">
+                      <%= link_to diary.title, category_diary_path(diary.category, diary), class:"text-dark"%>
+                    </p>
+                    <p class="card-text">
+                      <%= diary.body %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>  
+      </div>
     </div>
-    <div>
-      <%= link_to diary.title, category_diary_path(diary.category, diary) %>
-    </div>
-    <div>
-      <%= diary.body %>
-    </div>
-    <% end %>
+    
   </div>
-<% end %>
+</div>
+

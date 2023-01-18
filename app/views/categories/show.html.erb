@@ -1,29 +1,38 @@
-<h2><%= @category.name %></h2>
-
-<div>
-  <%= link_to "New diary", new_category_diary_path(@category) %>
-</div>
-
-
-<div>
-<% @diaries.each do |diary| %>
-  <div>
-  <%= image_tag diary.get_image(100,100) %>
+<div class="container py-1">
+  <div class="row">
+    <div class="col-3">
+      <h2><%= @category.name %></h2>
+    </div>
+    <div class="col-6">
+      <div class="card-list-container py-5">
+        <% @diaries.each do |diary| %>
+          <div class="card w-50 mx-auto mt-4 shadow-lg">
+            <%= image_tag diary.get_image(100,100), class:"card-img-top" %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-10">
+                  <p class="card-title">
+                    <%= link_to diary.title, category_diary_path(@category, diary), class:"text-dark"%>
+                  </p>
+                  <p class="card-text">
+                    <%= diary.body %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <%= link_to "New diary", new_category_diary_path(@category), class:"btn btn-dark" %>
+      </div>
+      <div>
+        <%= link_to 'Back', categories_path %>
+      </div>
+      <div><%= link_to 'Edit', edit_category_path(@category) %></div>
+      <div><%= link_to 'Delete', category_path(@category), method: :delete %></div>
+    </div>
   </div>
-
-  <div>
-  <%= link_to diary.title, category_diary_path(@category, diary) %>
-  </div>
-
-  <div>
-  <%= diary.body %>
-  </div>
-
-<% end %>
 </div>
-
-<div>
-  </br><%= link_to 'Back', categories_path %>
-</div>
-<div><%= link_to 'Edit', edit_category_path(@category) %></div>
-<div><%= link_to 'Delete', category_path(@category), method: :delete %></div>
