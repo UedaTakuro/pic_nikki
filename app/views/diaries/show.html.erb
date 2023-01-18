@@ -1,11 +1,33 @@
-<h2>Diary show</h2>
-
-<h3><%= link_to @diary.category.name, category_path(@diary.category) %></h3>
-
-<div><%= @diary.title %></div>
-<div><%= @diary.body %></div>
-
-<div><%= image_tag @diary.get_image(100, 100) %></div>
-
-<div><%= link_to 'Edit', edit_category_diary_path(@diary.category, @diary) %></div>
-<div><%= link_to 'Delete', category_diary_path(@diary.category, @diary), method: :delete %></div>
+<div class="container py-1">
+    <div class="row">
+    <div class="col-6 offset-3">
+      <h2><%= link_to @diary.category.name, category_path(@diary.category), class:"text-dark"%></h2>
+      <div class="card-list-container py-1">
+        <div class="card w-75 mx-auto mt-4 shadow-lg">
+              <%= link_to category_diary_path(@diary.category, @diary) do %>
+                <%= image_tag @diary.get_image(100,100), class:"card-img-top" %>
+              <%end%>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <p class="card-title">
+                      <%= link_to @diary.title, category_diary_path(@diary.category, @diary), class:"text-dark"%>
+                    </p>
+                    <p class="card-text">
+                      <%= @diary.body %>
+                    </p>
+                    <p class="text-right">
+                    <%= link_to 'Edit', edit_category_diary_path(@diary.category, @diary), class:"text-dark" %>|<%= link_to 'Delete', category_diary_path(@diary.category, @diary), method: :delete, data: { confirm: '本当に消しますか？' }, class:"text-dark" %>
+                    </p>
+                    <p class="text-right">
+                      投稿：<%= @diary.created_at.strftime('%Y/%m/%d') %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

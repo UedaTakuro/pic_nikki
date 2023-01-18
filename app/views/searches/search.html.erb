@@ -7,16 +7,21 @@
           <%= @search_again %>
         <% else %>
           <% @diaries.each do |diary| %>
-            <div class="card w-50 mx-auto mt-4 shadow-lg">
-              <%= image_tag diary.get_image(100,100), class:"card-img-top" %>
+            <div class="card w-75 mx-auto mt-4 shadow-lg">
+              <%= link_to category_diary_path(diary.category, diary) do %>
+                <%= image_tag diary.get_image(100,100), class:"card-img-top" %>
+              <%end%>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-10">
+                  <div class="col-12">
                     <p class="card-title">
                       <%= link_to diary.title, category_diary_path(diary.category, diary), class:"text-dark"%>
                     </p>
                     <p class="card-text">
                       <%= diary.body %>
+                    </p>
+                    <p class="text-right">
+                      投稿：<%= diary.created_at.strftime('%Y/%m/%d') %>
                     </p>
                   </div>
                 </div>

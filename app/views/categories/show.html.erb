@@ -1,21 +1,28 @@
 <div class="container py-1">
   <div class="row">
     <div class="col-3">
-      <h2><%= @category.name %></h2>
-    </div>
+      <h1><%= @category.name %></h1>
+    </div>  
     <div class="col-6">
       <div class="card-list-container py-5">
         <% @diaries.each do |diary| %>
-          <div class="card w-50 mx-auto mt-4 shadow-lg">
-            <%= image_tag diary.get_image(100,100), class:"card-img-top" %>
+          <div class="card w-75 mx-auto mt-4 shadow-lg">
+            <%= link_to category_diary_path(diary.category, diary) do %>
+              <%= image_tag diary.get_image(100,100), class:"card-img-top" %>
+            <%end%>
             <div class="card-body">
               <div class="row">
-                <div class="col-10">
+                <div class="col-12">
                   <p class="card-title">
-                    <%= link_to diary.title, category_diary_path(@category, diary), class:"text-dark"%>
+                    <%= link_to category_diary_path(@category, diary), class:"text-dark" do %>
+                      <i class="fa fa-book"></i><%= diary.title %>
+                    <%end%>
                   </p>
                   <p class="card-text">
                     <%= diary.body %>
+                  </p>
+                  <p class="text-right">
+                    投稿：<%= diary.created_at.strftime('%Y/%m/%d') %>
                   </p>
                 </div>
               </div>
@@ -28,11 +35,8 @@
       <div>
         <%= link_to "New diary", new_category_diary_path(@category), class:"btn btn-dark" %>
       </div>
-      <div>
-        <%= link_to 'Back', categories_path %>
-      </div>
-      <div><%= link_to 'Edit', edit_category_path(@category) %></div>
-      <div><%= link_to 'Delete', category_path(@category), method: :delete %></div>
+      <div><%= link_to 'Edit', edit_category_path(@category), class:"text-dark" %></div>
+      <div><%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: '本当に消しますか？' }, class:"text-dark" %></div>
     </div>
   </div>
 </div>
